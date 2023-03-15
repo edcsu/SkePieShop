@@ -13,19 +13,7 @@
             @foreach (var pie in Model.Pies)
             {
                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <div class="card mb-2">
-                        <img src=@pie.ImageUrl class="card-img-top" alt=@pie.Name>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a asp-controller="Pie" asp-action="Details" asp-route-id="@pie.Id">
-                                    @pie.Name
-                                </a>
-                            </h5>
-                            <h6 class="card-subtitle">@pie.Price.ToString("C")</h6>
-                            <p class="card-text">@pie.ShortDescription</p>
-                            <p class="small">@pie.CreatedAt.ToString("s")</p>
-                        </div>
-                    </div>
+                    <partial name="_PieCard" model="pie"/>
                 </div>
             }
     </div>
