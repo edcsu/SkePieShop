@@ -19,9 +19,15 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Pie>()
             .HasIndex(p => p.Id)
             .IsUnique();
+        
+        modelBuilder.Entity<ShoppingCartItem>()
+            .HasIndex(s => s.Id)
+            .IsUnique();
     }
     
     public DbSet<Pie> Pies { get; set; }
     
     public DbSet<Category> Categories { get; set; }
+    
+    public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 }
