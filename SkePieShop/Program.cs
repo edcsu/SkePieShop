@@ -1,11 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using SkePieShop.Data;
 using SkePieShop.Repositories.CategoryRepo;
 using SkePieShop.Repositories.PieRepo;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IPieRepository, MockPieRepository>();
-builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+builder.Services.AddScoped<IPieRepository, PieRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddControllersWithViews();
 
@@ -29,5 +35,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+Seeder.TrySeeding(app);
 
 app.Run();
