@@ -9,12 +9,15 @@ namespace SkePieShop.Controllers
     {
         private readonly IPieRepository _pieRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ILogger<PieController> _logger;
 
         public PieController(IPieRepository pieRepository, 
-            ICategoryRepository categoryRepository)
+            ICategoryRepository categoryRepository, 
+            ILogger<PieController> logger)
         {
             _pieRepository = pieRepository;
             _categoryRepository = categoryRepository;
+            _logger = logger;
         }
 
         public ViewResult List()
@@ -33,6 +36,7 @@ namespace SkePieShop.Controllers
             var pie = _pieRepository.GetPieById(id);
             if (pie is null)
             {
+                _logger.LogInformation("Pie with id: {ID} not found", id);
                 return NotFound();
             }
 

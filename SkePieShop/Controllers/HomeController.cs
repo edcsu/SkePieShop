@@ -1,21 +1,31 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SkePieShop.Models;
+using SkePieShop.Repositories.PieRepo;
+using SkePieShop.ViewModels;
 
 namespace SkePieShop.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IPieRepository _pieRepository;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger,
+        IPieRepository pieRepository)
     {
         _logger = logger;
+        _pieRepository = pieRepository;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var homeViewModel = new HomeViewModel
+        {
+            PiesOfTheWeek = _pieRepository.PiesOfTheWeek
+        };
+        
+        return View(homeViewModel);
     }
 
     public IActionResult Privacy()

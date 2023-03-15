@@ -1,8 +1,29 @@
-﻿@{
+﻿@model HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid">
+    <h1 class="display-4 fw-bold text-center">Welcome to Ske Pie shop</h1>
+    
+    <div class="row">
+        <div class="col-12">
+            <partial name="_Carousel" />  
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2 class="display-6 fw-bold text-center">Pies of the Week</h2>
+            <h4 class="text-center">Our weekly selection just for you!</h4>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var pie in Model.PiesOfTheWeek)
+        {
+            <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                <partial name="_PieCard" model="pie"/>
+            </div>
+        }
+    </div>
 </div>
