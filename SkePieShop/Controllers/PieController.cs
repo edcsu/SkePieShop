@@ -27,5 +27,16 @@ namespace SkePieShop.Controllers
             
             return View(model);
         }
+
+        public IActionResult Details(Guid id)
+        {
+            var pie = _pieRepository.GetPieById(id);
+            if (pie is null)
+            {
+                return NotFound();
+            }
+
+            return View(pie);
+        }
     }
 }

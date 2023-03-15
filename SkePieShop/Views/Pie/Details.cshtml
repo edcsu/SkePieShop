@@ -1,0 +1,22 @@
+@model Pie
+
+@{
+    ViewData["Title"] = "Pie Details";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="">@Model.Name</h1>
+            <div class="card mb-2">
+                <img src=@Model.ImageUrl class="card-img-top" alt=@Model.Name>
+                <div class="card-body">
+                    <h6 class="card-subtitle">@Model.Price.ToString("C")</h6>
+                    <p class="card-text">@Model.ShortDescription</p>
+                    <p class="card-text">@Model.LongDescription</p>
+                    <p class="small">@Model.CreatedAt.ToString("s")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
