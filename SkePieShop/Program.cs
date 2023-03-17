@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SkePieShop.Data;
 using SkePieShop.Models;
 using SkePieShop.Repositories.CategoryRepo;
+using SkePieShop.Repositories.OrderRepo;
 using SkePieShop.Repositories.PieRepo;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddScoped<IPieRepository, PieRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddScoped<ShoppingCart>( sp => ShoppingCart.GetCart(sp));
+
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
 builder.Services.AddHttpContextAccessor();
 
