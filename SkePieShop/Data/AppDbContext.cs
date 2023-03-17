@@ -23,6 +23,14 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<ShoppingCartItem>()
             .HasIndex(s => s.Id)
             .IsUnique();
+        
+        modelBuilder.Entity<Order>()
+            .HasIndex(o => o.Id)
+            .IsUnique();
+        
+        modelBuilder.Entity<OrderDetail>()
+            .HasIndex(o => o.Id)
+            .IsUnique();
     }
     
     public DbSet<Pie> Pies { get; set; }
@@ -30,4 +38,8 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+    
+    public DbSet<Order> Orders { get; set; }
+    
+    public DbSet<OrderDetail> OrderDetails { get; set; }
 }
