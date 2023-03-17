@@ -3,15 +3,15 @@
 @{
     // Layout = "_Layout";
 }
-
+    
 @if (Model.ShoppingCart.ShoppingCartItems.Count > 0)
 {
-    <li>
+    <div class="d-flex">
         <a class="btn btn-primary disabled" aria-disabled="true">
             Cart items 
             <span class="badge bg-info">
                 @Model.ShoppingCart.ShoppingCartItems.Count
             </span>
         </a>
-    </li>
+    </div>
 }
