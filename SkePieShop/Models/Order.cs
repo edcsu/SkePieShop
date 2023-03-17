@@ -6,7 +6,7 @@ namespace SkePieShop.Models;
 
 public class Order : BaseModel
 {
-        public List<OrderDetail> OrderLines { get; set; } = default!;
+        public List<OrderDetail>? OrderLines { get; set; }
 
         [Required(ErrorMessage = "Please enter your first name")]
         [Display(Name = "First name")]
