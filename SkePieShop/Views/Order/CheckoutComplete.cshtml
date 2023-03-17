@@ -1,10 +1,14 @@
 
 @{
     Layout = "_Layout";
+    ViewData["Title"] = "Checkout Complete Page";
 }
 
 <div class="container-fluid">
-    <h1 class="display-4 fw-bold text-center">
+    <h1 class="display-5 fw-bold text-center">
         @ViewBag.CheckoutCompleteMessage
     </h1>
+    <div class="card border-0" >
+      <img src="~/Images/order_confirmed.svg"  height="500" class="card-img-top" alt="checkout">
+    </div>
 </div>
