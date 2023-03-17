@@ -13,11 +13,11 @@ public class ShoppingCart
 
         public string ShoppingCartId { get; set; }
 
-        public List<ShoppingCartItem>? ShoppingCartItems { get; set; }
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         public static ShoppingCart GetCart(IServiceProvider services)
         {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
+            var session = services.GetRequiredService<IHttpContextAccessor>()?
                 .HttpContext.Session;
 
             var context = services.GetService<AppDbContext>();
@@ -80,7 +80,13 @@ public class ShoppingCart
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ??= _dbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+            if (ShoppingCartItems is not null)
+            {
+                return ShoppingCartItems;
+            }
+            
+            return ShoppingCartItems = _dbContext.ShoppingCartItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Include(s => s.Pie)
                 .ToList();
         }
@@ -96,11 +102,10 @@ public class ShoppingCart
             _dbContext.SaveChanges();
         }
 
-
-
         public decimal GetShoppingCartTotal()
         {
-            var total = _dbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+            var total = _dbContext.ShoppingCartItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Pie.Price * c.Amount).Sum();
             return total;
         }

@@ -16,6 +16,14 @@
                     <p class="card-text">@Model.LongDescription</p>
                     <p class="small">@Model.CreatedAt.ToString("s")</p>
                 </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" 
+                       asp-controller="ShoppingCart" 
+                       asp-action="AddToShoppingCart" 
+                       asp-route-pieId="@Model.Id">
+                        Add to cart
+                    </a>
+                </div>
             </div>
         </div>
     </div>

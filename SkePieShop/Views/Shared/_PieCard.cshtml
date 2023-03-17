@@ -10,6 +10,11 @@
         </h5>
         <h6 class="card-subtitle">@Model.Price.ToString("C")</h6>
         <p class="card-text">@Model.ShortDescription</p>
-        <p class="small">@Model.CreatedAt.ToString("s")</p>
+        <p class="small  text-muted">@Model.CreatedAt.ToString("s")</p>
+        <div class="card-footer">
+            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-pieId="@Model.Id">
+                Add to cart
+            </a>
+        </div>
     </div>
 </div>
