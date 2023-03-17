@@ -20,7 +20,8 @@ public class OrderRepository : IOrderRepository
     public void CreateOrder(Order order)
     {
         order.OrderPlaced = DateTime.UtcNow;
-
+        order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+        
         _dbContext.Orders.Add(order);
 
         var shoppingCartItems = _shoppingCart.ShoppingCartItems;
