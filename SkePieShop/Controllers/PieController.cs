@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SkePieShop.Models;
 using SkePieShop.Repositories.CategoryRepo;
 using SkePieShop.Repositories.PieRepo;
 using SkePieShop.ViewModels;
@@ -20,15 +21,30 @@ namespace SkePieShop.Controllers
             _logger = logger;
         }
 
-        public ViewResult List()
+        public ViewResult List(string category)
         {
-            var model = new PiesListViewModel
+            IEnumerable<Pie> pies;
+            string currentCategory;
+
+            if (string.IsNullOrEmpty(category))
             {
-                CurrentCategory = "Cheese cakes",
-                Pies = _pieRepository.GetAllPies
-            };
-            
-            return View(model);
+                pies = _pieRepository.GetAllPies.OrderBy(p => p.Id);
+                currentCategory = "All pies";
+            }
+            else
+            {
+                pies = _pieRepository.GetAllPies.Where(p => p.Category.Name == category)
+                    .OrderBy(p => p.Id);
+                
+                currentCategory = _categoryRepository.AllCategories
+                    .FirstOrDefault(c => c.Name == category)!.Name;
+            }
+
+            return View(new PiesListViewModel
+            {
+                Pies = pies,
+                CurrentCategory = currentCategory
+            });
         }
 
         public IActionResult Details(Guid id)
