@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SkePieShop.Models;
 
 namespace SkePieShop.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<IdentityUser>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -12,6 +14,8 @@ public class AppDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
         modelBuilder.Entity<Category>()
             .HasIndex(c => c.Id)
             .IsUnique();

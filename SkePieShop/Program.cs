@@ -4,6 +4,7 @@ using SkePieShop.Models;
 using SkePieShop.Repositories.CategoryRepo;
 using SkePieShop.Repositories.OrderRepo;
 using SkePieShop.Repositories.PieRepo;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,13 @@ builder.Services.AddSession();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppDbContext>();
+
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -44,11 +50,14 @@ app.UseSession();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id:guid?}");
+
+app.MapRazorPages();
 
 Seeder.TrySeeding(app);
 

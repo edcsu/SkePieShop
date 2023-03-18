@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/SkePieShop.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
 <header>
@@ -34,7 +35,8 @@
                 </ul>
                 
                 @await Component.InvokeAsync("ShoppingCartSummary")
-            
+                
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
