@@ -1,0 +1,24 @@
+@model Pie
+
+<div class="card my-2">
+    <img src=@Model.ImageUrl class="card-img-top" alt=@Model.Name>
+    <div class="card-body">
+        <h5 class="card-title">
+            <a asp-controller="Pie" asp-action="Details" asp-route-id="@Model.Id">
+                @Model.Name
+            </a>
+        </h5>
+        <h6 class="card-subtitle">@Model.Price.ToString("C")</h6>
+        <p class="card-text">@Model.ShortDescription</p>
+        <p class="small  text-muted">@Model.CreatedAt.ToString("s")</p>
+        <div class="card-footer">
+            <a class="btn btn-primary" 
+               asp-controller="ShoppingCart" 
+               asp-action="AddToShoppingCart" 
+               asp-route-pieId="@Model.Id">
+                <i class="bi bi-cart-plus-fill me-1"></i>
+                Add to cart
+            </a>
+        </div>
+    </div>
+</div>

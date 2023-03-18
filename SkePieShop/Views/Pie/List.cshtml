@@ -1,0 +1,20 @@
+@model PiesListViewModel
+
+@{
+    ViewData["Title"] = "Pie List";
+}
+
+<h1>
+    @Model.CurrentCategory
+</h1> 
+
+<div class="container-fluid">
+    <div class="row">
+            @foreach (var pie in Model.Pies)
+            {
+                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                    <partial name="_PieCard" model="pie"/>
+                </div>
+            }
+    </div>
+</div>
