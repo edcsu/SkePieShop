@@ -12,7 +12,11 @@
         <p class="card-text">@Model.ShortDescription</p>
         <p class="small  text-muted">@Model.CreatedAt.ToString("s")</p>
         <div class="card-footer">
-            <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-pieId="@Model.Id">
+            <a class="btn btn-primary" 
+               asp-controller="ShoppingCart" 
+               asp-action="AddToShoppingCart" 
+               asp-route-pieId="@Model.Id">
+                <i class="bi bi-cart-plus-fill me-1"></i>
                 Add to cart
             </a>
         </div>

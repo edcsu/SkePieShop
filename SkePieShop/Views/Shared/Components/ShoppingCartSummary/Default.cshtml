@@ -7,11 +7,11 @@
 @if (Model.ShoppingCart.ShoppingCartItems.Count > 0)
 {
     <div class="d-flex">
-        <a class="btn btn-info disabled" aria-disabled="true">
-            Cart items 
+        <p class="bg-info px-3 pt-1 mx-1">
+            <i class="bi bi-cart-fill me-1" style="font-size: 2rem;"></i> 
             <span class="badge bg-success">
                 @Model.ShoppingCart.ShoppingCartItems.Count
             </span>
-        </a>
+        </p>
     </div>
 }
